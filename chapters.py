@@ -35,7 +35,7 @@ class TitleScene(Slide):
 class OverviewScene(Slide):
 
     def construct(self):
-        overview = Title("Overview")
+        overview = Title("Chapters")
         overview_list = BulletedList("Math introduction", "Elliptic curves", "A famous NSA backdoor", "ECDSA", "EdDSA", color=YELLOW)
         rect = SurroundingRectangle(overview_list[0])
 
@@ -43,7 +43,5 @@ class OverviewScene(Slide):
             Write(overview),
             LaggedStartMap(FadeIn, overview_list, shift=0.5 * DOWN, lag_ratio=0.25)
         )
-
-        self.next_slide()
 
         self.play(DrawBorderThenFill(rect))
