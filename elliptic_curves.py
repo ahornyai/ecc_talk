@@ -12,9 +12,10 @@ NUMBER_PLANE = None
 
 class EllipticCurveIntroduction(Slide):
     def construct(self):
-        eq = Tex("$y^2 = x^3 + ax + b$").scale(1.5)
+        short_weierstrass = Tex("Short Weierstrass equation")
+        eq = Tex("$y^2 = x^3 + ax + b$").scale(1.5).next_to(short_weierstrass, DOWN)
 
-        self.play(Write(eq))
+        self.play(Write(short_weierstrass), Write(eq))
 
 class MoveAlongPathPiece(Animation):
     def __init__(self, mobject, mobject2, path, t_min, t_max, t_min2, t_max2, **kwargs):
@@ -316,7 +317,7 @@ class EllipticCurveScene(Slide):
         
         self.play(Write(m_t), Write(lineeq_t))
 
-        self.wait(3)
+        self.next_slide()
 
         intersectedline_t = Tex("\\begin{align*}\pm \sqrt{x^3+ax+b} \\\\ = y_P + m(x-x_P) \\end{align*}").scale(.75).next_to(m_t, 1.25*DOWN)
         self.play(
@@ -325,7 +326,8 @@ class EllipticCurveScene(Slide):
                 intersectedline_t
             )
         )
-        self.wait(1)
+
+        self.next_slide()
         
         rxry_t = Tex(
                 """\\begin{align*}
@@ -361,7 +363,8 @@ class EllipticCurveScene(Slide):
             )
         )
 
-        self.wait(1)
+        self.next_slide()
+
         self.play(
             MovePointsWithLineAndThirdPoint(
                 NUMBER_PLANE.coords_to_point,
@@ -391,14 +394,14 @@ class EllipticCurveScene(Slide):
 
         self.play(Write(mtaneq_t),Write(mtanrhs))
 
-        self.wait(.5)
+        self.next_slide()
         self.play(
             Transform(
                 mtanrhs,
                 mtanrhs2
             )
         )
-        self.wait(.5)
+        self.next_slide()
         self.play(
             Transform(
                 mtanrhs,
