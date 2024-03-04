@@ -1015,6 +1015,75 @@ class EllipticCurveOverGF(Slide):
             return NUMBER_PLANE.coords_to_point(t, (ppp[1] + m*(t-ppp[0]))%p)
         return (modlinefn, disc)
 
+class EfficientMultiplication(Slide):
+
+    def construct(self):
+        a = Tex("$100P = 2(2[P + 2(2[2(P + 2P)])])$").scale(1.5)
+
+        self.play(Write(a))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(2[P + 2(2[2(3P)])])$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(2[P + 2(2[6P])])$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(2[P + 2(12P)])$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(2[P + 24P])$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(2[25P])$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 2(50P)$").scale(1.5)
+        ))
+
+        self.next_slide()
+
+        self.play(Transform(
+            a,
+            Tex("$100P = 100P$").scale(1.5)
+        ))
+        
+        steps = Tex("We only need $\lceil \log_{2}d \\rceil$ steps").set_color(YELLOW)
+
+        self.play(
+            a.animate.move_to(UP),
+            Write(steps)
+        )
+        pass
+
+class GroupOrderScene(Slide):
+
+    def construct(self):
+        pass
+
 def c2p(x,y):
     return NUMBER_PLANE.coords_to_point(x,y)
 
