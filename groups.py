@@ -111,10 +111,10 @@ class GroupScene(Slide):
         forall_as_in_int = Tex("$\\forall a,b,c \in \mathbb{Z}$").scale(2/3).move_to(forall_as_in_group.get_center())
 
         identity_in_int = Tex("$0+a = a$").scale(2/3).move_to(identity_in_group.get_center())
-        forall_id_in_int = Tex("$\\exists 0 \\in \mathbb{Z} \\; \\forall a \in \mathbb{Z}$").scale(2/3).move_to(forall_id_in_group.get_center())
+        forall_id_in_int = Tex("$\\exists 0 \in \mathbb{Z} \\; \\forall a \in \mathbb{Z}$").scale(2/3).move_to(forall_id_in_group.get_center())
 
         inverse_in_int = Tex("$a+(-a) = 0$").scale(2/3).move_to(inverse_in_group.get_center())
-        forall_inv_in_int = Tex("$\\exists {-a} \\in \mathbb{Z} \\; \\forall a \in \mathbb{Z}$").scale(2/3).move_to(forall_inv_in_group.get_center())
+        forall_inv_in_int = Tex("$\\exists {-a} \in \mathbb{Z} \\; \\forall a \in \mathbb{Z}$").scale(2/3).move_to(forall_inv_in_group.get_center())
 
         self.play(
             Transform(groups, example),

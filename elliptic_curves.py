@@ -1082,7 +1082,25 @@ class EfficientMultiplication(Slide):
 class GroupOrderScene(Slide):
 
     def construct(self):
-        pass
+        mul = Tex("$kP=\\underbrace{P+P+P+\\ldots+P}_{k\\text{-times}} = 0$").set_color(YELLOW)
+        o = Tex("If $k = m * o(P)$ where $m \in \mathbb{Z}$")
+
+        self.play(Write(mul))
+        
+        self.next_slide()
+        
+        self.play(
+            mul.animate.move_to(UP),
+            Write(o)
+        )
+
+        self.next_slide()
+
+        img = ImageMobject("./order.png").scale(2.3)
+
+        self.play(FadeOut(mul, shift=DOWN), FadeOut(o, shift=DOWN))
+        self.play(FadeIn(img))
+
 
 def c2p(x,y):
     return NUMBER_PLANE.coords_to_point(x,y)
