@@ -1015,6 +1015,7 @@ class EllipticCurveOverGF(Slide):
             return NUMBER_PLANE.coords_to_point(t, (ppp[1] + m*(t-ppp[0]))%p)
         return (modlinefn, disc)
 
+# TODO: this is really bad, the animations should be more clear
 class EfficientMultiplication(Slide):
 
     def construct(self):
@@ -1100,6 +1101,133 @@ class GroupOrderScene(Slide):
 
         self.play(FadeOut(mul, shift=DOWN), FadeOut(o, shift=DOWN))
         self.play(FadeIn(img))
+
+class ECDHScene(Slide):
+
+    def construct(self):
+        apos = LEFT*4.25
+        bpos = RIGHT*4.5
+
+        alice = Tex("Alice",color=YELLOW)
+        alice.move_to(apos)
+        self.play(Write(alice))
+        
+        bob = Tex("Bob")
+        bob.move_to(bpos)
+        self.play(Write(bob))
+
+        arrow = ArcBetweenPoints(apos, bpos)
+        arrow.add_tip(tip_length=.2)
+        arrow.shift(DOWN*0.5)
+        self.play(Create(arrow))
+
+        h_a = Tex("$H_a$",color=YELLOW).scale(0.5).next_to(apos,UP*1.5+3*L)
+        h_a_inf = Tex("(Alice's public key point)",color=YELLOW).scale(.5).next_to(h_a, R)
+        d_a = Tex("$d_a$",color=YELLOW).scale(0.5).next_to(h_a,UP)
+        d_a_inf = Tex("(Alice's private key)",color=YELLOW).scale(.5).next_to(d_a, R)
+        h_b = Tex("$H_b$").scale(0.5).next_to(bpos,UP*1.5+3*L)
+        h_b_inf = Tex("(Bob's public key point)").scale(.5).next_to(h_b, R)
+        d_b = Tex("$d_b$").scale(0.5).next_to(h_b, U)
+        d_b_inf = Tex("(Bob's private key)").scale(.5).next_to(d_b, R)
+        self.play(*[Write(x) for x in [h_a,h_a_inf,d_a,d_a_inf,h_b,h_b_inf,d_b,d_b_inf]])
+
+        self.next_slide()
+
+        self.play(
+            h_a.animate.next_to(bpos,UP*1.5+3*L),
+            h_a_inf.animate.next_to(h_b,R),
+            h_b.animate.next_to(apos,UP*1.5+3*L),
+            h_b_inf.animate.next_to(h_a,R)
+        )
+
+        self.next_slide()
+
+        self.play(
+            *[FadeOut(x, shift=DOWN) for x in [h_a_inf,h_b_inf,d_a_inf,d_b_inf]],
+            h_a.animate.scale(2),
+            h_b.animate.scale(2),
+            d_a.animate.scale(2),
+            d_b.animate.scale(2),
+        )
+
+        self.play(
+            h_a.animate.shift(R),
+            h_b.animate.shift(R),
+        )
+        
+        self.wait(.5)
+
+        self.play(
+            d_a.animate.next_to(h_b,.5*L),
+            d_b.animate.next_to(h_a,.5*L),
+        )
+
+        self.wait(.5)
+
+        h_a2 = Tex("$(d_a G)$").next_to(h_a,0)
+        h_b2 = Tex("$(d_b G)$").next_to(h_b,0)
+        h_a3 = Tex("$d_a G$").next_to(h_a,0)
+        h_b3 = Tex("$d_b G$").next_to(h_b,0)
+
+        self.play(
+            Transform(
+                h_a,
+                h_a2
+            ),
+            Transform(
+                h_b,
+                h_b2
+            ),
+            d_a.animate.shift(.1*L),
+            d_b.animate.shift(.1*L),
+        )
+
+        self.play(
+            FadeToColor(d_a,WHITE),
+            Transform(
+                h_a,
+                h_a3
+            ),
+            Transform(
+                h_b,
+                h_b3
+            )
+        )
+
+        self.wait(.5)
+
+        mid = UP*2
+        eq = Tex("$=$").move_to(mid)
+
+        lhs = VGroup(h_b,d_a)
+        rhs = VGroup(h_a,d_b)
+
+        self.play(
+            Write(eq),
+            lhs.animate.next_to(mid,1.2*L),
+            rhs.animate.next_to(mid,1.2*R),
+        )
+
+        self.next_slide()
+
+        eve = Tex("Eve",color=RED)
+        indicator = Circle(radius=0.6).move_to(eve.get_center()).set_color(RED)
+
+        self.play(Write(eve))
+        self.play(Create(indicator))
+        
+        ecdlh = Tex("Elliptic Curve Discrete Logarithm Problem",color=YELLOW).move_to(UP)
+        self.play(Write(ecdlh))
+
+        self.next_slide()
+
+        self.play(
+            *[FadeOut(x, shift=DOWN) for x in [eve,indicator, lhs, rhs, eq, alice, bob, arrow]],
+        )
+
+        self.play(
+            ecdlh.animate.move_to(3*UP)
+        )
 
 
 def c2p(x,y):
