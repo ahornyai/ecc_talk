@@ -1229,6 +1229,18 @@ class ECDHScene(Slide):
             ecdlh.animate.move_to(3*UP)
         )
 
+        attacks = BulletedList("Pohlig-Hellman", "Baby-Step Giant-Step", "Pollard's rho", "MOV attack", "Smart's attack", "Singular curve")
+        attacks.align_to(ecdlh)
+
+        self.play(
+            LaggedStartMap(FadeIn, attacks, shift=0.5 * DOWN, lag_ratio=0.25)
+        )
+
+        eq = Tex("$Q = d*P$").next_to(attacks, DOWN)
+        d_unknown = Tex("d = ?").next_to(eq, DOWN)
+
+        self.play(Write(eq), Write(d_unknown))
+
 
 def c2p(x,y):
     return NUMBER_PLANE.coords_to_point(x,y)
