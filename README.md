@@ -4,4 +4,4 @@ sources:
 - order: https://youproof.hu/kriptografia/24-csoport-reszcsoport-mellekosztaly-lagrange-tetel-csoport-rendje-elem-rendje-miller-rabin-primteszt/
 
 
-manim-slides TitleScene OverviewScene GroupScene AbelianGroupScene ModularScene ModularEquations
+manim-slides TitleScene OverviewScene GroupScene AbelianGroupScene ModularScene ModularEquations EllipticCurveIntroduction EllipticCurveScene EllipticCurveAdditionScene EllipticCurveOverGF EfficientMultiplication GroupOrderScene ECDHScene DualECScene ECDSAScene
