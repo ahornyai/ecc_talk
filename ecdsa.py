@@ -103,3 +103,32 @@ class RepeatedNonceScene(Slide):
 
         self.next_slide()
         self.play(Create(cross))
+
+class RepeatedNonceExampleScene(Slide):
+
+    def construct(self):
+        ps3 = Text("PlayStation 3").move_to(3*UP)
+        ps3_img = ImageMobject("./ecdsa_examples/sony_ps3.png").next_to(ps3, DOWN)
+
+        self.play(Write(ps3))
+        self.play(FadeIn(ps3_img, shift=DOWN))
+
+        self.next_slide()
+
+        self.play(FadeOut(ps3, shift=DOWN), FadeOut(ps3_img, shift=DOWN))
+
+        android = Text("Android SecureRandom").move_to(3*UP)
+        android_img = ImageMobject("./ecdsa_examples/android_securerandom.png").scale(1.5).next_to(android, DOWN)
+
+        self.play(Write(android))
+        self.play(FadeIn(android_img, shift=DOWN))
+
+        self.next_slide()
+
+        self.play(FadeOut(android, shift=DOWN), FadeOut(android_img, shift=DOWN))
+
+        blockchain = Text("blockchain.info - random.org incident").move_to(3*UP)
+        blockchain_img = ImageMobject("./ecdsa_examples/blockchain_random_org.png").next_to(blockchain, DOWN)
+
+        self.play(Write(blockchain))
+        self.play(FadeIn(blockchain_img, shift=DOWN))
