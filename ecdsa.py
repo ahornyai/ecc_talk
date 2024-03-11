@@ -132,3 +132,45 @@ class RepeatedNonceExampleScene(Slide):
 
         self.play(Write(blockchain))
         self.play(FadeIn(blockchain_img, shift=DOWN))
+
+class BiasedNonceAttackScene(Slide):
+
+    def construct(self):
+        title = Text("Biased nonce attacks with lattices")
+
+        self.play(Write(title))
+
+        self.next_slide()
+        self.play(title.animate.move_to(3*UP))
+
+        what_if = Text("What if the most significant bits of our nonces are all zero?").scale(0.7).move_to(UP)
+        then = Tex("$ \implies$ our nonce k will be way smaller than our private key d").set_color(YELLOW)
+
+        self.play(Write(what_if))
+        self.play(Write(then))
+        
+        k_group = VGroup()
+
+        k_1 = Tex("$k_1 \equiv s_1^{-1} * h_1 + s_1^{-1} * r*d \ (\mathrm{mod}\ q)$").move_to(DOWN)
+        k_2 = Tex("$k_2 \equiv s_2^{-1} * h_2 + s_2^{-1} * r*d \ (\mathrm{mod}\ q)$").next_to(k_1, DOWN)
+
+        k_group.add(k_1, k_2)
+
+        self.play(Write(k_group))
+
+        self.next_slide()
+
+        group = VGroup()
+        k_vec = Matrix(np.transpose([["k_1", "k_2"]])).move_to(2*DOWN + 4*LEFT)
+        eq = Tex("$ \equiv $").move_to(2*DOWN + 3*LEFT)
+        c_vec = Matrix(np.transpose([["s_1^{-1} * h_1", "s_2^{-1} * h_2"]])).move_to(2*DOWN + 1.4*LEFT)
+        plus = Tex("$ + $").move_to(2*DOWN + 0.2*RIGHT)
+        d_vec = Matrix(np.transpose([["s_1^{-1} * r*d", "s_2^{-1} * r*d"]])).move_to(2*DOWN + 2*RIGHT)
+        mod = Tex("$(\mathrm{mod}\ q)$").move_to(2*DOWN + 4.5*RIGHT)
+
+        group.add(k_vec.get_brackets(), k_vec.get_columns()[0])
+        group.add(eq, plus, mod)
+        group.add(c_vec.get_brackets(), c_vec.get_columns()[0])
+        group.add(d_vec.get_brackets(), d_vec.get_columns()[0])
+
+        self.play(Transform(k_group, group))
