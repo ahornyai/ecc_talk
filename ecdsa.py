@@ -39,11 +39,6 @@ class ECDSAScene(Slide):
         self.wait(0.1)
         self.play(Write(SurroundingRectangle(k, buff=0.07)), Write(SurroundingRectangle(point_G, buff=0.07)), Write(SurroundingRectangle(h, buff=0.07)))
 
-class CurveballScene(Slide): # TODO
-
-    def construct(self):
-        title = Text("Curveball - CVE-2020-0601")
-
 class RepeatedNonceScene(Slide):
 
     def construct(self):
