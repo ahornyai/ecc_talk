@@ -136,14 +136,14 @@ class RepeatedNonceExampleScene(Slide):
 class BiasedNonceAttackScene(Slide):
 
     def construct(self):
-        title = Text("Biased nonce attacks with lattices")
+        title = Text("Biased nonce lattice attacks")
 
         self.play(Write(title))
 
         self.next_slide()
         self.play(title.animate.move_to(3*UP))
 
-        what_if = Text("What if the most significant bits of our nonces are all zero?").scale(0.7).move_to(UP)
+        what_if = Text("What if the few most significant bits of our nonces are constantly all zero?").scale(0.6).move_to(UP)
         then = Tex("$ \implies$ our nonce k will be way smaller than our private key d").set_color(YELLOW)
 
         self.play(Write(what_if))
@@ -167,6 +167,7 @@ class BiasedNonceAttackScene(Slide):
         plus = Tex("$ + $").move_to(2*DOWN + 0.2*RIGHT)
         d_vec = Matrix(np.transpose([["s_1^{-1} * r*d", "s_2^{-1} * r*d"]])).move_to(2*DOWN + 2*RIGHT)
         mod = Tex("$(\mathrm{mod}\ q)$").move_to(2*DOWN + 4.5*RIGHT)
+        vec_equation = Tex("$ \\vec{k} \equiv \\vec{h} + d*\\vec{r} \ (\mathrm{mod}\ q)$").move_to(3.5*DOWN)
 
         group.add(k_vec.get_brackets(), k_vec.get_columns()[0])
         group.add(eq, plus, mod)
@@ -174,3 +175,43 @@ class BiasedNonceAttackScene(Slide):
         group.add(d_vec.get_brackets(), d_vec.get_columns()[0])
 
         self.play(Transform(k_group, group))
+        self.play(Write(vec_equation))
+
+class ShortVectorScene(Slide):
+    
+    def construct(self):
+        plane = NumberPlane()
+
+        h_loc = np.array((0.3, 1.5, 0))
+        r_loc = np.array((0.6, 1.2, 0))
+        r_1_loc = r_loc - h_loc
+
+        h = Arrow(start=ORIGIN, end=h_loc, buff=0).set_color(RED)
+        r = Arrow(start=ORIGIN, end=r_loc, buff=0).set_color(GREEN)
+
+        dots = []
+
+        self.add(plane)
+
+        # really bad solution but this will be good enough for now
+        for i in range(-25, 25):
+            for j in range(-25, 25):
+                dots.append(Dot(i*h_loc + j*r_loc))
+        
+
+        self.play(GrowArrow(h), GrowArrow(r))
+        
+        self.next_slide()
+        self.play(LaggedStartMap(FadeIn, dots, shift=0.5 * DOWN, lag_ratio=0.01))
+
+        self.next_slide()
+
+        self.play(r.animate.rotate(PI))
+        self.play(r.animate.shift(-r_1_loc))
+
+        shortest_vector = Arrow(start=ORIGIN, end=-r_1_loc, buff=0).set_color(PINK)
+        shortest_vector.stroke_width = 6
+        
+        self.next_slide()
+        self.play(GrowArrow(shortest_vector))
+        self.play(FadeOut(r), FadeOut(h))
