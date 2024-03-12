@@ -14,5 +14,3 @@
 - ECDSA related vulns on blockhains: https://eprint.iacr.org/2019/023.pdf
 - Detailed lattice explanation: https://eprint.iacr.org/2023/032.pdf
 - Curveball presentation by dnet: https://youtu.be/nZ7anPETOJ8?t=3432
-
-manim-slides TitleScene OverviewScene GroupScene AbelianGroupScene ModularScene ModularEquations EllipticCurveIntroduction EllipticCurveScene EllipticCurveAdditionScene EllipticCurveOverGF EfficientMultiplication GroupOrderScene ECDHScene DualECScene ECDSAScene

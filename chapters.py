@@ -18,7 +18,7 @@ class TitleScene(Slide):
         self.next_slide()
 
         # whoami slide
-        whoami = Title("whoami")
+        whoami = Text("whoami").move_to(3*UP)
 
         self.play(
             FadeOut(author), 
@@ -35,7 +35,7 @@ class TitleScene(Slide):
 class OverviewScene(Slide):
 
     def construct(self):
-        overview = Title("Chapters")
+        overview = Text("Chapters").move_to(3*UP)
         overview_list = BulletedList("Math introduction", "Elliptic curves", "A famous NSA backdoor", "ECDSA", "EdDSA", color=YELLOW)
         rect = SurroundingRectangle(overview_list[0])
 
