@@ -45,3 +45,22 @@ class OverviewScene(Slide):
         )
 
         self.play(DrawBorderThenFill(rect))
+
+class GitHubScene(Slide):
+
+    def construct(self):
+        img = ImageMobject("ecdsa_examples/github_ecc_cryptanalysis.png").scale(0.8)
+        url = Text("https://github.com/ahornyai/ecc_cryptanalysis").scale(0.7).next_to(img, DOWN)
+
+        self.play(FadeIn(img, shift=DOWN), Write(url))
+
+class EndingScene(Slide):
+
+    def construct(self):
+        thanks = Text("Thanks for your attention").move_to(2*UP).set_color(YELLOW)
+        github_logo = ImageMobject("logo/github.png").scale(0.5).move_to(4*LEFT + 2.5*DOWN)
+        linkedin_logo = ImageMobject("logo/linkedin.png").scale(0.4).move_to(5*RIGHT + 2.5*DOWN)
+        github = Text("ahornyai").scale(0.5).next_to(github_logo, LEFT)
+        linkedin = Text("Hornyai Alex").scale(0.5).next_to(linkedin_logo, LEFT)
+
+        self.play(Write(thanks), FadeIn(github_logo, shift=DOWN), FadeIn(linkedin_logo, shift=DOWN), Write(github), Write(linkedin))
