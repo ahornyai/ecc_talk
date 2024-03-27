@@ -2,6 +2,8 @@
 - install https://www.manim.community/plugin/manim-slides/#installation
 - `./render.sh && ./start.sh`
 
+## [HUN] Available on youtube: https://www.youtube.com/watch?v=gNwYsYJliFk
+
 # sources:
 - groups: http://fizweb.elte.hu/download/Fizika-BSc/Algebrai-alapfogalmak-a-fizikaban/Jegyzet/csoportelm_jegyzet_2017.pdf
 - modular: https://youproof.hu/kriptografia/18-modularis-aritmetika-homomorfizmus-kongruencia-reszgyuru-ideal-maradekosztalygyuru/
